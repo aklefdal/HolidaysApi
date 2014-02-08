@@ -24,3 +24,13 @@ type HolidayRendition = {
 [<CLIMutable>]
 type HolidaysRendition = {
     Holidays : HolidayRendition array }
+
+[<CLIMutable>]
+type DateRendition = {
+    Date : string
+    IsSunday: bool
+    IsSaturday: bool
+    IsHoliday: bool
+    IsWorkday: bool
+    PreviousWorkday: string
+    PreviousWorkdayLink: AtomLinkRendition }

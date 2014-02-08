@@ -9,4 +9,6 @@ type HttpRouteDefaults = { Controller : string; Id : obj }
 type Global() =
     inherit System.Web.HttpApplication()
     member this.Application_Start (sender : obj) (e : EventArgs) =
+        GlobalConfiguration.Configuration.Formatters.XmlFormatter.UseXmlSerializer <- true
         Configure GlobalConfiguration.Configuration
+        
