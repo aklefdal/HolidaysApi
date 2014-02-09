@@ -25,7 +25,7 @@ type EasterController() =
 
         this.Request.CreateResponse(
             HttpStatusCode.OK,
-            { EasterDay = easterDay.ToString("yyyy-MM-dd") })
+            { EasterDay = Dates.FormatDate easterDay })
     member this.Get() = 
         let year =
             DateTime.Now.Year
@@ -39,10 +39,10 @@ type HolidaysController() =
             Holidays.ForYear year
             |> Seq.map (fun (name, date) -> 
                 { 
-                    Date = date.ToString("yyyy-MM-dd")
+                    Date = Dates.FormatDate date
                     Name = name
                     DateLink = { Rel = "http://aklefdal.com/date"
-                                 Href =  String.Format("date/{0:yyyy-MM-dd}", date)}})
+                                 Href =  Dates.FormatDateLink date}})
             |> List.ofSeq
             |> List.sortBy (fun holiday -> holiday.Date)
         this.Request.CreateResponse(
@@ -53,3 +53,28 @@ type HolidaysController() =
             DateTime.Now.Year
 
         this.Get year
+
+type DateController() =
+    inherit ApiController()
+
+    member this.Get year month day =
+        let date = new DateTime(year, month, day) 
+        let previousWorkday = Dates.PreviousWorkday date
+        this.Request.CreateResponse(
+            HttpStatusCode.OK,
+            {
+                Date = Dates.FormatDate date
+                IsSunday = Dates.IsSunday date
+                IsSaturday = Dates.IsSaturday date
+                IsHoliday = Holidays.IsHoliday date
+                IsWorkday = Dates.IsWorkDay date
+                PreviousWorkday = Dates.FormatDate previousWorkday
+                PreviousWorkdayLink = { Rel = "http://aklefdal.com/date"
+                                        Href = Dates.FormatDateLink previousWorkday}})
+
+//    
+//    member this.Get() = 
+//        let today = DateTime.Today
+//        this.Request.CreateResponse(
+//            HttpStatusCode.OK,
+//            makeRendition today)

@@ -1,0 +1,16 @@
+﻿using System.Web.Http;
+using Aklefdal.Holidays.HttpApi;
+
+namespace HolidaysApi.WebHostCS
+{
+    public class WebApiApplication : System.Web.HttpApplication
+    {
+        protected void Application_Start()
+        {
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+            GlobalConfiguration.Configuration.Formatters.XmlFormatter.UseXmlSerializer = true;
+            Infrastructure.Configure(GlobalConfiguration.Configuration);
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new SetCacheHeadersHandler());
+        }
+    }
+}

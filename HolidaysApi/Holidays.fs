@@ -20,3 +20,10 @@ module Holidays =
             yield ("1. juledag", new DateTime(year, 12, 25)) 
             yield ("2. juledag", new DateTime(year, 12, 26)) 
             }
+    
+    let DatesForYear year =
+        ForYear year |> Seq.map (fun (_, holiday) -> holiday)
+    
+    let IsHoliday(date : DateTime) =
+        let holidays = DatesForYear date.Year
+        Seq.exists (fun elem -> elem = date.Date) holidays

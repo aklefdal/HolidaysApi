@@ -17,15 +17,10 @@ let ConfigureRoutes (config : HttpConfiguration) =
         "holidays/{year}",
         { Controller = "Holidays"; Id = RouteParameter.Optional }) |> ignore
 
-//    config.Routes.MapHttpRoute(
-//        "HolidaysMonth",
-//        "holidays/{year}/{month}",
-//        { Controller = "Holidays"; Id = RouteParameter.Optional }) |> ignore
-//
-//    config.Routes.MapHttpRoute(
-//        "HolidaysDay",
-//        "holidays/{year}/{month}/{day}",
-//        { Controller = "Holidays"; Id = RouteParameter.Optional }) |> ignore
+    config.Routes.MapHttpRoute(
+        "Dates",
+        "date/{year}/{month}/{day}",
+        { Controller = "Date"; Id = RouteParameter.Optional }) |> ignore
 
     config.Routes.MapHttpRoute(
         "DefaultAPI",
