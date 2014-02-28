@@ -11,16 +11,16 @@ module Dates =
         let day = date.DayOfWeek
         day = DayOfWeek.Saturday
 
-    let IsWorkDay(date:DateTime) =
+    let IsWorkDay(country:string, date:DateTime) =
         if IsSunday date then false
         elif IsSaturday date then false
-        elif Holidays.IsHoliday date then false
+        elif Holidays.IsHoliday(country, date) then false
         else true
 
-    let rec PreviousWorkday(date:DateTime) =
+    let rec PreviousWorkday(country:string, date:DateTime) =
         let previousDay = date.AddDays(float -1)
-        if (IsWorkDay previousDay) then previousDay
-        else PreviousWorkday previousDay
+        if IsWorkDay(country, previousDay) then previousDay
+        else PreviousWorkday(country, previousDay)
 
     let FormatDate(date:DateTime) =
         date.ToString("yyyy-MM-dd")

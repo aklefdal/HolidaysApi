@@ -23,10 +23,12 @@ type HolidayRendition = {
 
 [<CLIMutable>]
 type HolidaysRendition = {
+    CountryCode: string
     Holidays : HolidayRendition array }
 
 [<CLIMutable>]
 type DateRendition = {
+    CountryCode: string
     Date : string
     IsSunday: bool
     IsSaturday: bool

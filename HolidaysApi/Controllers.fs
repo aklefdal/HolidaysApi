@@ -34,9 +34,9 @@ type EasterController() =
 
 type HolidaysController() =
     inherit ApiController()
-    member this.Get(year:int) = 
+    member this.Get(country, year) =
         let holidays =
-            Holidays.ForYear year
+            Holidays.ForYear(country, year)
             |> Seq.map (fun (name, date) -> 
                 { 
                     Date = Dates.FormatDate date
@@ -47,7 +47,15 @@ type HolidaysController() =
             |> List.sortBy (fun holiday -> holiday.Date)
         this.Request.CreateResponse(
             HttpStatusCode.OK,
-            { Holidays = Seq.toArray holidays })
+            {
+                CountryCode = country 
+                Holidays = Seq.toArray holidays 
+            })
+         
+    member this.Get(year:int) =
+        let country = CountryCode.CurrentCountry
+        this.Get(country, year)
+
     member this.Get() = 
         let year =
             DateTime.Now.Year
@@ -57,24 +65,22 @@ type HolidaysController() =
 type DateController() =
     inherit ApiController()
 
-    member this.Get year month day =
+    member this.Get(country, year, month, day) =
         let date = new DateTime(year, month, day) 
-        let previousWorkday = Dates.PreviousWorkday date
+        let previousWorkday = Dates.PreviousWorkday(country, date)
         this.Request.CreateResponse(
             HttpStatusCode.OK,
             {
+                CountryCode = country
                 Date = Dates.FormatDate date
                 IsSunday = Dates.IsSunday date
                 IsSaturday = Dates.IsSaturday date
-                IsHoliday = Holidays.IsHoliday date
-                IsWorkday = Dates.IsWorkDay date
+                IsHoliday = Holidays.IsHoliday(country, date)
+                IsWorkday = Dates.IsWorkDay(country, date)
                 PreviousWorkday = Dates.FormatDate previousWorkday
                 PreviousWorkdayLink = { Rel = "http://aklefdal.com/date"
                                         Href = Dates.FormatDateLink previousWorkday}})
 
-//    
-//    member this.Get() = 
-//        let today = DateTime.Today
-//        this.Request.CreateResponse(
-//            HttpStatusCode.OK,
-//            makeRendition today)
+    member this.Get(year, month, day) =
+        let country = CountryCode.CurrentCountry
+        this.Get(country, year, month, day)

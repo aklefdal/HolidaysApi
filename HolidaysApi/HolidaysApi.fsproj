@@ -49,6 +49,7 @@
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
   <ItemGroup>
+    <Compile Include="CountryCode.fs" />
     <Compile Include="Easter.fs" />
     <Compile Include="Holidays.fs" />
     <Compile Include="Dates.fs" />

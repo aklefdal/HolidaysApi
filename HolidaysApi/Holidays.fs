@@ -3,7 +3,7 @@
 open System
 
 module Holidays =
-    let ForYear year =
+    let HolidaysNO year =
         let easterday = Computus.EasterDay year
         seq {
             yield ("1. nyttårsdag", new DateTime(year, 1, 1))
@@ -21,9 +21,15 @@ module Holidays =
             yield ("2. juledag", new DateTime(year, 12, 26)) 
             }
     
-    let DatesForYear year =
-        ForYear year |> Seq.map (fun (_, holiday) -> holiday)
+    let ForYear(country:string, year:int) =
+        let countryUpperCase = country.ToUpperInvariant()
+        match countryUpperCase with
+            | "NO" -> HolidaysNO year
+            | _ -> Seq.empty
+
+    let DatesForYear country year =
+        ForYear(country, year) |> Seq.map (fun (_, holiday) -> holiday)
     
-    let IsHoliday(date : DateTime) =
-        let holidays = DatesForYear date.Year
+    let IsHoliday(country, date:DateTime) =
+        let holidays = DatesForYear country date.Year
         Seq.exists (fun elem -> elem = date.Date) holidays
