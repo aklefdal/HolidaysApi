@@ -42,7 +42,7 @@ type HolidaysController() =
                     Date = Dates.FormatDate date
                     Name = name
                     DateLink = { Rel = "http://aklefdal.com/date"
-                                 Href =  Dates.FormatDateLink date}})
+                                 Href =  Dates.FormatDateLinkWithCountry(country, date)}})
             |> List.ofSeq
             |> List.sortBy (fun holiday -> holiday.Date)
         this.Request.CreateResponse(
@@ -79,7 +79,7 @@ type DateController() =
                 IsWorkday = Workdays.IsWorkDay(country, date)
                 PreviousWorkday = Dates.FormatDate previousWorkday
                 PreviousWorkdayLink = { Rel = "http://aklefdal.com/date"
-                                        Href = Dates.FormatDateLink previousWorkday}})
+                                        Href = Dates.FormatDateLinkWithCountry(country, previousWorkday)}})
 
     member this.Get(year, month, day) =
         let country = CountryCode.CurrentCountry

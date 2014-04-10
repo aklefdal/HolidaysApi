@@ -24,3 +24,5 @@ module Dates =
         date.ToString("yyyy-MM-dd")
 
     let FormatDateLink (date:DateTime) = String.Format("date/{0}", date.ToString("yyyy\/MM\/dd"))
+
+    let FormatDateLinkWithCountry (country, date:DateTime) = String.Format("date/{0}/{1}", country, date.ToString("yyyy\/MM\/dd"))
