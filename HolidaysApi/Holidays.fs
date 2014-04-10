@@ -44,12 +44,35 @@ module Holidays =
             yield ("Annandag Jul", new DateTime(year, 12, 26)) 
             yield ("Nyårsafton", new DateTime(year, 12, 31)) 
             }
+
+    let HolidaysDK year =
+        // http://www.finansraadet.dk/Bankkunde/Pages/bankhelligdage.aspx
+        let easterday = Computus.EasterDay year
+        seq {
+            yield ("Nytårsdag", new DateTime(year, 1, 1))
+            yield ("Palmesøndag", easterday.AddDays(float -7)) 
+            yield ("Skærtorsdag", easterday.AddDays(float -3)) 
+            yield ("Langfredag", easterday.AddDays(float -2)) 
+            yield ("1. påskedag", easterday) 
+            yield ("2. påskedag", easterday.AddDays(float 1)) 
+            yield ("Store Bededag", easterday.AddDays(float 26)) 
+            yield ("Kristi Himmelfartsdag", easterday.AddDays(float 39)) 
+            yield ("Bankhelligdag", easterday.AddDays(float 40)) 
+            yield ("1. pinsedag", easterday.AddDays(float 49)) 
+            yield ("2. pinsedag", easterday.AddDays(float 50)) 
+            yield ("Grundlovsdag", new DateTime(year, 6, 5)) 
+            yield ("Juleaftensdag", new DateTime(year, 12, 24)) 
+            yield ("1. juledag", new DateTime(year, 12, 25)) 
+            yield ("2. juledag", new DateTime(year, 12, 26)) 
+            yield ("Nytårsaftensdag ", new DateTime(year, 12, 31)) 
+            }
     
     let ForYear(country:string, year:int) =
         let countryUpperCase = country.ToUpperInvariant()
         match countryUpperCase with
             | "NO" -> HolidaysNO year
             | "SE" -> HolidaysSE year
+            | "DK" -> HolidaysDK year
             | _ -> Seq.empty
 
     let DatesForYear country year =
