@@ -51,8 +51,9 @@
   <ItemGroup>
     <Compile Include="CountryCode.fs" />
     <Compile Include="Easter.fs" />
-    <Compile Include="Holidays.fs" />
     <Compile Include="Dates.fs" />
+    <Compile Include="Holidays.fs" />
+    <Compile Include="Workdays.fs" />
     <Compile Include="Renditions.fs" />
     <Compile Include="Controllers.fs" />
     <Compile Include="Infrastructure.fs" />

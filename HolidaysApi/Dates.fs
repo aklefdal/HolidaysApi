@@ -3,6 +3,10 @@
 open System
 
 module Dates =
+    type Span = Span of TimeSpan with
+        static member (+) (d:DateTime, Span wrapper) = d + wrapper
+        static member Zero = Span(new TimeSpan(0L))
+
     let IsSunday(date:DateTime) = 
         let day = date.DayOfWeek
         day = DayOfWeek.Sunday
@@ -11,16 +15,10 @@ module Dates =
         let day = date.DayOfWeek
         day = DayOfWeek.Saturday
 
-    let IsWorkDay(country:string, date:DateTime) =
-        if IsSunday date then false
-        elif IsSaturday date then false
-        elif Holidays.IsHoliday(country, date) then false
-        else true
-
-    let rec PreviousWorkday(country:string, date:DateTime) =
-        let previousDay = date.AddDays(float -1)
-        if IsWorkDay(country, previousDay) then previousDay
-        else PreviousWorkday(country, previousDay)
+    let WeekdayAfterOrOn(weekday:DayOfWeek, firstDate:DateTime) =
+        let ts = TimeSpan.FromDays(1.0)
+        [ firstDate .. Span(ts) .. firstDate.AddDays(float 6) ]
+        |> Seq.find (fun (date) -> date.DayOfWeek = weekday)
 
     let FormatDate(date:DateTime) =
         date.ToString("yyyy-MM-dd")
