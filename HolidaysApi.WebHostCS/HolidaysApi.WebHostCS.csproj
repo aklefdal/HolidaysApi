@@ -95,11 +95,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\HolidaysApi\HolidaysApi.fsproj">
       <Project>{0aa038b3-7225-4ad8-9c3a-95b16ea01d44}</Project>
