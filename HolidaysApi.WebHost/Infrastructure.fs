@@ -15,7 +15,7 @@ type HttpRouteDefaults = { Controller : string; Id : obj }
 //    let setHeader task:Task<HttpResponseMessage> = 
 //        let mutable response = task.Result
 //        response.Headers.CacheControl.Public <- true
-//        response.Headers.CacheControl.MaxAge <- new Nullable<TimeSpan>(TimeSpan.FromDays(float 30))
+//        response.Headers.CacheControl.MaxAge <- new Nullable<TimeSpan>(TimeSpan.FromDays(30.0))
 //        response
 //
 //    override this.SendAsync(request:HttpRequestMessage, cancellationToken:CancellationToken) =

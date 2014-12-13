@@ -17,7 +17,7 @@ module Dates =
 
     let WeekdayAfterOrOn(weekday:DayOfWeek, firstDate:DateTime) =
         let ts = TimeSpan.FromDays(1.0)
-        [ firstDate .. Span(ts) .. firstDate.AddDays(float 6) ]
+        [ firstDate .. Span(ts) .. firstDate.AddDays(6.0) ]
         |> Seq.find (fun (date) -> date.DayOfWeek = weekday)
 
     let FormatDate(date:DateTime) =

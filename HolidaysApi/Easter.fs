@@ -29,4 +29,4 @@ module Computus =
         let firstSundayInMarch = 7 - ((year + year / 4 + secularSunShift) % 7)
         let easterSundayDistance = 7 - ((easterLimit - firstSundayInMarch) % 7)
         let firstOfMarch = new DateTime(year, 3, 1)
-        firstOfMarch.AddDays(float easterLimit).AddDays(float easterSundayDistance).AddDays(float -1)
+        firstOfMarch.AddDays(float easterLimit).AddDays(float easterSundayDistance).AddDays(-1.0)
