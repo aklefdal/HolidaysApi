@@ -19,19 +19,13 @@ let ``Easter Day is Sunday`` year =
         | System.DayOfWeek.Sunday -> true
         | _ -> false
 
-let EasterIsInAllowedRange year= 
-    true ==> (lazy (``Easter is betweeen March and April`` year))
-
-let EasterDayIsSunday year= 
-    true ==> (lazy (``Easter Day is Sunday`` year))
-
 let smallYears = 
     FsCheck.Gen.choose(0,9999) |> Arb.fromGen
 
 [<Test>]
 let ``Test that easterday is sunday``() = 
-    Check.QuickThrowOnFailure (Prop.forAll (smallYears) EasterDayIsSunday)
+    Check.QuickThrowOnFailure (Prop.forAll (smallYears) ``Easter Day is Sunday``)
 
 [<Test>]
 let ``Test that easter is in march or april``() = 
-    Check.QuickThrowOnFailure (Prop.forAll (smallYears) EasterIsInAllowedRange)
+    Check.QuickThrowOnFailure (Prop.forAll (smallYears) ``Easter is betweeen March and April``)
