@@ -5,22 +5,33 @@ open FsCheck
 open Aklefdal.Holidays.HttpApi.Computus
 
 //http://en.wikipedia.org/wiki/Easter
-//let ``Easter is betweeen 4th April and 8th of May`` year? =
-let ``Easter is betweeen March and May`` year =
+let ``Easter is betweeen March and April`` year =
     let easter = EasterDay2 year 
     let easterMonth = easter.Month
     match easterMonth with
         | 3 -> true
         | 4 -> true
-        | 5 -> true
+        | _ -> false
+
+let ``Easter Day is Sunday`` year =
+    let easter = EasterDay2 year 
+    match easter.DayOfWeek with
+        | System.DayOfWeek.Sunday -> true
         | _ -> false
 
 let EasterIsInAllowedRange year= 
-    true ==> (lazy ( ``Easter is betweeen March and May`` year))
+    true ==> (lazy (``Easter is betweeen March and April`` year))
+
+let EasterDayIsSunday year= 
+    true ==> (lazy (``Easter Day is Sunday`` year))
 
 let smallYears = 
-    FsCheck.Gen.choose(2000,2500) |> Arb.fromGen
+    FsCheck.Gen.choose(0,9999) |> Arb.fromGen
 
 [<Test>]
-let ``Test that easter is in april or may``() = 
+let ``Test that easterday is sunday``() = 
+    Check.QuickThrowOnFailure (Prop.forAll (smallYears) EasterDayIsSunday)
+
+[<Test>]
+let ``Test that easter is in march or april``() = 
     Check.QuickThrowOnFailure (Prop.forAll (smallYears) EasterIsInAllowedRange)
