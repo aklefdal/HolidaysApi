@@ -7,7 +7,7 @@ open Aklefdal.Holidays.HttpApi.Holidays
 
 let ``Langfredag is fredag in Norway`` (date: DateTime) =
     let norwegianHolidays =  HolidaysNO date.Year 
-    let (_, langfredag)= Seq.find (fun (name, holidayDate) -> name = "Langfredag") norwegianHolidays
+    let (_, langfredag)= Seq.find (fun (name, _) -> name = "Langfredag") norwegianHolidays
     langfredag.DayOfWeek = DayOfWeek.Friday
 
 [<Test>]
@@ -19,12 +19,12 @@ let ``Test that langfredag is fredag``() =
 
 let ``Kristi himmelfartsdag is thursday`` (date: DateTime) =
     let norwegianHolidays =  HolidaysNO date.Year 
-    let (_, himmelfartsdag)= Seq.find (fun (name, holidayDate) -> name = "Kristi Himmelfartsdag") norwegianHolidays
+    let (_, himmelfartsdag)= Seq.find (fun (name, _) -> name = "Kristi Himmelfartsdag") norwegianHolidays
     himmelfartsdag.DayOfWeek = DayOfWeek.Thursday
 
 let ``Kristi himmelfartsdag is between 30. april – 3. juni`` (date: DateTime) =
     let norwegianHolidays =  HolidaysNO date.Year 
-    let (_, himmelfartsdag)= Seq.find (fun (name, holidayDate) -> name = "Kristi Himmelfartsdag") norwegianHolidays
+    let (_, himmelfartsdag)= Seq.find (fun (name, _) -> name = "Kristi Himmelfartsdag") norwegianHolidays
     let year = date.Year
     let firstPossibleDay = new DateTime(year, 4, 30)
     let lastPossibleDay = new DateTime(year, 6, 3)

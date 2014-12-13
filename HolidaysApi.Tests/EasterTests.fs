@@ -5,17 +5,6 @@ open FsCheck
 open System 
 open Aklefdal.Holidays.HttpApi.Computus
 
-//http://en.wikipedia.org/wiki/Easter
-let ``Easter is in March and April using algorithm 1`` (date: DateTime) =
-    let easter = EasterDay date.Year
-    let easterMonth = easter.Month
-    easterMonth = 3 || easterMonth = 4 
-
-let ``Easter is in March and April using algorithm 2`` (date: DateTime) =
-    let easter = EasterDay2 date.Year
-    let easterMonth = easter.Month
-    easterMonth = 3 || easterMonth = 4 
-
 let ``Easter Day is Sunday`` (date: DateTime) =
     let easter = EasterDay2 date.Year
     easter.DayOfWeek = DayOfWeek.Sunday
@@ -24,10 +13,22 @@ let ``Easter Day is Sunday`` (date: DateTime) =
 let ``Test that easterday is sunday``() = 
     Check.QuickThrowOnFailure ``Easter Day is Sunday``
 
-[<Test>]
-let ``Test that easter is in march or april using algorithim 1``() = 
-    Check.QuickThrowOnFailure ``Easter is in March and April using algorithm 1``
+let ``In Western Christianity, using the Gregorian calendar, Easter always falls on a Sunday between 22 March and 25 April inclusive``(date: DateTime) =
+    let easter = EasterDay date.Year
+    let firstPossibleDay = new DateTime(date.Year, 3, 22)
+    let lastPossibleDay = new DateTime(date.Year, 4, 25)
+    easter >= firstPossibleDay && easter <= lastPossibleDay 
+
+let ``Alg2: In Western Christianity, using the Gregorian calendar, Easter always falls on a Sunday between 22 March and 25 April inclusive``(date: DateTime) =
+    let easter = EasterDay2 date.Year
+    let firstPossibleDay = new DateTime(date.Year, 3, 22)
+    let lastPossibleDay = new DateTime(date.Year, 4, 25)
+    easter >= firstPossibleDay && easter <= lastPossibleDay 
 
 [<Test>]
-let ``Test that easter is in march or april using algorithm 2``() = 
-    Check.QuickThrowOnFailure ``Easter is in March and April using algorithm 2``
+let ``Test that In Western Christianity, using the Gregorian calendar, Easter always falls on a Sunday between 22 March and 25 April inclusive``() =
+    Check.QuickThrowOnFailure ``In Western Christianity, using the Gregorian calendar, Easter always falls on a Sunday between 22 March and 25 April inclusive``
+
+[<Test>]
+let ``Alg2: Test that In Western Christianity, using the Gregorian calendar, Easter always falls on a Sunday between 22 March and 25 April inclusive``() =
+    Check.QuickThrowOnFailure ``Alg2: In Western Christianity, using the Gregorian calendar, Easter always falls on a Sunday between 22 March and 25 April inclusive``
