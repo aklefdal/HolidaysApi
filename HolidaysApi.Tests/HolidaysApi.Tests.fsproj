@@ -73,6 +73,7 @@
     <None Include="packages.config" />
     <Compile Include="FsCheckAddin.fs" />
     <None Include="app.config" />
+    <Compile Include="HolidayTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HolidaysApi\HolidaysApi.fsproj">
