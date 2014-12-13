@@ -34,9 +34,10 @@ type EasterController() =
 
 type HolidaysController() =
     inherit ApiController()
-    member this.Get(country, year) =
+
+    let ProperHolidayResponse country year =
         let holidays =
-            Holidays.ForYear(country, year)
+            Holidays.ForYear country year
             |> Seq.map (fun (name, date) -> 
                 { 
                     Date = Dates.FormatDate date
@@ -45,16 +46,27 @@ type HolidaysController() =
                                  Href =  Dates.FormatDateLinkWithCountry(country, date)}})
             |> List.ofSeq
             |> List.sortBy (fun holiday -> holiday.Date)
-        this.Request.CreateResponse(
-            HttpStatusCode.OK,
+        let response =
             {
-                CountryCode = country 
+                CountryCode = CountryCode.CodeFromCountry country 
                 Holidays = Seq.toArray holidays 
-            })
+            }
+        response
+         
+    let FindHolidayResponse countryCode year =
+        match countryCode with
+        | Some country -> Some (ProperHolidayResponse country year)
+        | None -> None
+
+    member this.Get(country, year) =
+        let countryInput = CountryCode.CountryFromCode country
+        match FindHolidayResponse countryInput year with
+            | Some response -> this.Request.CreateResponse(HttpStatusCode.OK, response)
+            | None -> this.Request.CreateResponse(HttpStatusCode.NotImplemented) 
          
     member this.Get(year:int) =
-        let country = CountryCode.CurrentCountry
-        this.Get(country, year)
+        let country = CountryCode.CurrentCountryOrDefault
+        this.Get(CountryCode.CodeFromCountry country, year)
 
     member this.Get() = 
         let year =
@@ -65,13 +77,11 @@ type HolidaysController() =
 type DateController() =
     inherit ApiController()
 
-    member this.Get(country, year, month, day) =
-        let date = new DateTime(year, month, day) 
+    let ProperDateResponse country date =
         let previousWorkday = Workdays.PreviousWorkday country date
-        this.Request.CreateResponse(
-            HttpStatusCode.OK,
+        let response =
             {
-                CountryCode = country
+                CountryCode = CountryCode.CodeFromCountry country 
                 Date = Dates.FormatDate date
                 IsSunday = Dates.IsSunday date
                 IsSaturday = Dates.IsSaturday date
@@ -79,8 +89,22 @@ type DateController() =
                 IsWorkday = Workdays.IsWorkDay country date
                 PreviousWorkday = Dates.FormatDate previousWorkday
                 PreviousWorkdayLink = { Rel = "http://aklefdal.com/date"
-                                        Href = Dates.FormatDateLinkWithCountry(country, previousWorkday)}})
+                                        Href = Dates.FormatDateLinkWithCountry(CountryCode.CodeFromCountry country, previousWorkday)}
+            }
+        response
+
+    let FindDateResponse countryCode date =
+        match countryCode with
+        | Some country -> Some (ProperDateResponse country date)
+        | None -> None
+
+    member this.Get(country, year, month, day) =
+        let countryInput = CountryCode.CountryFromCode country
+        let date = new DateTime(year, month, day) 
+        match FindDateResponse countryInput date with
+            | Some response -> this.Request.CreateResponse(HttpStatusCode.OK, response)
+            | None -> this.Request.CreateResponse(HttpStatusCode.NotImplemented, "Not implemented for country: " + country) 
 
     member this.Get(year, month, day) =
-        let country = CountryCode.CurrentCountry
+        let country = CountryCode.CurrentCountryCode
         this.Get(country, year, month, day)

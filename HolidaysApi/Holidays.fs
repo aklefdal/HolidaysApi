@@ -67,16 +67,16 @@ module Holidays =
             yield ("Nytårsaftensdag ", new DateTime(year, 12, 31)) 
             }
     
-    let ForYear(country:string, year:int) =
-        let countryUpperCase = country.ToUpperInvariant()
-        match countryUpperCase with
-            | "NO" -> HolidaysNO year
-            | "SE" -> HolidaysSE year
-            | "DK" -> HolidaysDK year
-            | _ -> Seq.empty
+    let ForYear (country:CountryCode.Countries) (year:int) =
+        match country with
+            | CountryCode.Countries.Norway -> HolidaysNO year
+            | CountryCode.Countries.Sweden -> HolidaysSE year
+            | CountryCode.Countries.Denmark -> HolidaysDK year
+            | CountryCode.Countries.GreatBrittain -> HolidaysDK year
+            | CountryCode.Countries.USA -> HolidaysDK year
 
     let DatesForYear country year =
-        ForYear(country, year) |> Seq.map (fun (_, holiday) -> holiday)
+        ForYear country year |> Seq.map (fun (_, holiday) -> holiday)
     
     let IsHoliday country  (date:DateTime) =
         let holidays = DatesForYear country date.Year
