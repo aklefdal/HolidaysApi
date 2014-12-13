@@ -9,16 +9,11 @@ open Aklefdal.Holidays.HttpApi.Computus
 let ``Easter is in March and April`` (date: DateTime) =
     let easter = EasterDay2 date.Year
     let easterMonth = easter.Month
-    match easterMonth with
-        | 3 -> true
-        | 4 -> true
-        | _ -> false
+    easterMonth = 3 || easterMonth = 4 
 
 let ``Easter Day is Sunday`` (date: DateTime) =
     let easter = EasterDay2 date.Year
-    match easter.DayOfWeek with
-        | System.DayOfWeek.Sunday -> true
-        | _ -> false
+    easter.DayOfWeek = DayOfWeek.Sunday
 
 [<Test>]
 let ``Test that easterday is sunday``() = 
