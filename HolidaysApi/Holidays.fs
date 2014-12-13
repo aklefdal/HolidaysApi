@@ -78,6 +78,6 @@ module Holidays =
     let DatesForYear country year =
         ForYear(country, year) |> Seq.map (fun (_, holiday) -> holiday)
     
-    let IsHoliday(country, date:DateTime) =
+    let IsHoliday country  (date:DateTime) =
         let holidays = DatesForYear country date.Year
         Seq.exists (fun elem -> elem = date.Date) holidays

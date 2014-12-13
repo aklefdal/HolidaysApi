@@ -67,7 +67,7 @@ type DateController() =
 
     member this.Get(country, year, month, day) =
         let date = new DateTime(year, month, day) 
-        let previousWorkday = Workdays.PreviousWorkday(country, date)
+        let previousWorkday = Workdays.PreviousWorkday country date
         this.Request.CreateResponse(
             HttpStatusCode.OK,
             {
@@ -75,8 +75,8 @@ type DateController() =
                 Date = Dates.FormatDate date
                 IsSunday = Dates.IsSunday date
                 IsSaturday = Dates.IsSaturday date
-                IsHoliday = Holidays.IsHoliday(country, date)
-                IsWorkday = Workdays.IsWorkDay(country, date)
+                IsHoliday = Holidays.IsHoliday country date
+                IsWorkday = Workdays.IsWorkDay country date
                 PreviousWorkday = Dates.FormatDate previousWorkday
                 PreviousWorkdayLink = { Rel = "http://aklefdal.com/date"
                                         Href = Dates.FormatDateLinkWithCountry(country, previousWorkday)}})
