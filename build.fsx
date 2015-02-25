@@ -12,7 +12,7 @@ let buildDir  = "./build/"
 let testDir   = "./test/"
 
 // Filesets
-let appReferences  = !! "HolidaysApi.WebHostCS\*.csproj"
+let appReferences  = !! "HolidaysApi.WebHost\*.fsproj"
 
 let testReferences = !! "HolidaysApi.Tests\*.fsproj"
 
