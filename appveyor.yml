@@ -1,4 +1,4 @@
-?before_build:
+before_build:
   - nuget restore
 assembly_info:
   patch: false
