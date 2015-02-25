@@ -11,7 +11,6 @@ open System.IO
 let buildDir  = "./build/"
 let testDir   = "./test/"
 
-// Filesets
 let appReferences  = !! "HolidaysApi.WebHost\*.fsproj"
 
 let testReferences = !! "HolidaysApi.Tests\*.fsproj"
