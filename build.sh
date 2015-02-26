@@ -2,7 +2,7 @@
 if test "$OS" = "Windows_NT"
 then
 
-  .nuget/nugete.exe restore
+  .nuget/nuget.exe restore
   exit_code=$?
   if [ $exit_code -ne 0 ]; then
     exit $exit_code
@@ -12,7 +12,7 @@ then
 else
   # use mono
 
-  mono .fake/fake.exe restore
+  mono packages/FAKE/tools/FAKE.exe restore
   exit_code=$?
   if [ $exit_code -ne 0 ]; then
     exit $exit_code
