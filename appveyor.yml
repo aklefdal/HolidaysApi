@@ -1,0 +1,21 @@
+before_build:
+  - nuget restore
+assembly_info:
+  patch: false
+build_script:
+  build.cmd
+test: off
+artifacts:
+  - path: build
+    name: easterAzure
+    type: WebDeployPackage
+deploy:
+  - provider: WebDeploy
+    server: https://alfeaster.scm.azurewebsites.net:443/msdeploy.axd?site=alfeaster
+    website: alfeaster
+    username: $alfeaster
+    password:
+      secure: t+OiT6XjKY0o2brHWnRTPPIduE/rWPOv2/HzgONgTKjEY5CzTP8259Sp5f9N/0AT8R1D3rDT30K+/ywK/QYZRw==
+    artifact: easterAzure
+    on:
+      branch: fake
