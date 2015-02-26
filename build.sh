@@ -13,6 +13,7 @@ else
   # use mono
   chmod +x .nuget/nuget.exe
   .nuget/nuget.exe restore
+  .nuget/nuget.exe install FAKE -OutputDirectory tools -ExcludeVersion -Prerelease
   exit_code=$?
   if [ $exit_code -ne 0 ]; then
     exit $exit_code
