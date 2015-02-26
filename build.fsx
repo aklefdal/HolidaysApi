@@ -36,7 +36,8 @@ Target "NUnitTest" (fun _ ->
     !! (testDir + "/HolidaysApi.Tests.dll")
         |> NUnit (fun p -> 
             {p with
-                DisableShadowCopy = true; })
+                DisableShadowCopy = true; 
+                OutputFile = testDir + "TestResults.xml"})
 )
 
 // Build order
