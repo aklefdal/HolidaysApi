@@ -1,5 +1,5 @@
 language: objective-c
-
+sudo: on
 env:
  global:
   - EnableNuGetPackageRestore=true 
