@@ -1,5 +1,5 @@
 language: objective-c
-sudo: on
+sudo: false
 env:
  global:
   - EnableNuGetPackageRestore=true 
@@ -11,4 +11,4 @@ before_install:
  - sudo installer -pkg "MonoFramework-MDK-${MONO_VERSION}.macos10.xamarin.x86.pkg" -target /
 
 script:
- - sudo ./build.sh
+ - ./build.sh
