@@ -11,6 +11,7 @@ then
   mono tools/FAKE/tools/FAKE.exe build.fsx $@
 else
   # use mono
+  chmod +x .nuget/nuget.exe
   .nuget/nuget.exe restore
   exit_code=$?
   if [ $exit_code -ne 0 ]; then
