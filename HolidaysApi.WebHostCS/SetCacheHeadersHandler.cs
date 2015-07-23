@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 namespace HolidaysApi.WebHostCS
 {
+    using System.Net.Http.Headers;
+
     public class SetCacheHeadersHandler : DelegatingHandler
     {
         protected override Task<HttpResponseMessage> SendAsync(
@@ -16,8 +18,11 @@ namespace HolidaysApi.WebHostCS
                     {
                         var response = task.Result;
 
-                        response.Headers.CacheControl.Public = true;
-                        response.Headers.CacheControl.MaxAge = TimeSpan.FromDays(30);
+                        response.Headers.CacheControl = new CacheControlHeaderValue
+                                                            {
+                                                                Public = true,
+                                                                MaxAge = TimeSpan.FromDays(30)
+                                                            };
 
                         return response;
                     }, cancellationToken);
