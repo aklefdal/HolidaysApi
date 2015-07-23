@@ -38,12 +38,12 @@ type HolidaysController() =
     let ProperHolidayResponse country year =
         let holidays =
             Holidays.ForYear country year
-            |> Seq.map (fun (name, date) ->
+            |> Seq.map (fun holiday ->
                 {
-                    Date = Dates.FormatDate date
-                    Name = name
+                    Date = Dates.FormatDate holiday.Date
+                    Name = holiday.Name
                     DateLink = { Rel = "http://aklefdal.com/date"
-                                 Href =  Dates.FormatDateLinkWithCountry(CountryCode.CodeFromCountry country, date)}})
+                                 Href =  Dates.FormatDateLinkWithCountry(CountryCode.CodeFromCountry country, holiday.Date)}})
             |> List.ofSeq
             |> List.sortBy (fun holiday -> holiday.Date)
         let response =

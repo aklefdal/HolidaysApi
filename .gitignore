@@ -9,6 +9,7 @@ test/
 build/
 tools/
 .vs/
+.fake/
 
 # Build results
 
