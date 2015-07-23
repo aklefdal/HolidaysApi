@@ -7,7 +7,6 @@ namespace HolidaysApi.WebHostCS
     {
         protected void Application_Start()
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.UseXmlSerializer = true;
             Infrastructure.Configure(GlobalConfiguration.Configuration);
             GlobalConfiguration.Configuration.MessageHandlers.Add(new SetCacheHeadersHandler());
