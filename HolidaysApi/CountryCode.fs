@@ -26,7 +26,7 @@ module CountryCode =
 
     let CurrentCountryCode = 
         let currentCulture = System.Globalization.CultureInfo.CurrentCulture
-        let countrychars = currentCulture.ToString().ToCharArray() |> Array.rev |> Seq.take 2 |> Seq.toArray |> Array.rev
+        let countrychars = currentCulture.ToString().ToCharArray() |> Array.rev |> Seq.take 2 |> Seq.toArray |> Array.rev // TODO
         System.String.Concat(countrychars)
 
     let CurrentCountry = CountryFromCode CurrentCountryCode
