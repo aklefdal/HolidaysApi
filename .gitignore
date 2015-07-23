@@ -8,6 +8,8 @@
 test/
 build/
 tools/
+.vs/
+
 # Build results
 
 [Dd]ebug/
