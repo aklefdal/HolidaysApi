@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HolidaysApi.WebHost", "HolidaysApi.WebHost\HolidaysApi.WebHost.fsproj", "{0DA1FEE2-E3FF-41BC-AECA-9D784D209A98}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HolidaysApi", "HolidaysApi\HolidaysApi.fsproj", "{0AA038B3-7225-4AD8-9C3A-95B16EA01D44}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HolidaysApi.WebHostCS", "HolidaysApi.WebHostCS\HolidaysApi.WebHostCS.csproj", "{56017FC3-978B-47BD-95B0-73F08CDFBB2F}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "HolidaysApi.Tests", "HolidaysApi.Tests\HolidaysApi.Tests.fsproj", "{52C2D53B-55CB-4753-84CE-F81365247730}"
 EndProject
@@ -30,10 +28,6 @@ Global
 		{0AA038B3-7225-4AD8-9C3A-95B16EA01D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AA038B3-7225-4AD8-9C3A-95B16EA01D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AA038B3-7225-4AD8-9C3A-95B16EA01D44}.Release|Any CPU.Build.0 = Release|Any CPU
-		{56017FC3-978B-47BD-95B0-73F08CDFBB2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56017FC3-978B-47BD-95B0-73F08CDFBB2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56017FC3-978B-47BD-95B0-73F08CDFBB2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56017FC3-978B-47BD-95B0-73F08CDFBB2F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{52C2D53B-55CB-4753-84CE-F81365247730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{52C2D53B-55CB-4753-84CE-F81365247730}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{52C2D53B-55CB-4753-84CE-F81365247730}.Release|Any CPU.ActiveCfg = Release|Any CPU
