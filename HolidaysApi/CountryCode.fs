@@ -3,7 +3,7 @@
 open System
 
 module CountryCode = 
-    type Countries = Norway | Sweden | Denmark
+    type Country = Norway | Sweden | Denmark
 
     let DefaultCountry = Norway
 
