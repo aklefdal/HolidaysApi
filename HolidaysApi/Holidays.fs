@@ -13,7 +13,7 @@ module Holidays =
         let easterday = Computus.EasterDay year
         seq {
             yield { Name =  "1. nyttårsdag"
-                    Date = new DateTime(year, 1, 1) }
+                    Date = DateTime(year, 1, 1) }
             yield { Name =   "Palmesøndag" 
                     Date = easterday.AddDays(-7.0) }
             yield { Name =   "Skjærtorsdag" 
@@ -31,15 +31,15 @@ module Holidays =
             yield { Name =  "2. pinsedag" 
                     Date = easterday.AddDays(50.0) }
             yield { Name =  "Offentlig høytidsdag" 
-                    Date = new DateTime(year, 5, 1) }
+                    Date = DateTime(year, 5, 1) }
             yield { Name =  "Grunnlovsdag" 
-                    Date = new DateTime(year, 5, 17) }
+                    Date = DateTime(year, 5, 17) }
             yield { Name =  "Julaften" 
-                    Date = new DateTime(year, 12, 24) }
+                    Date = DateTime(year, 12, 24) }
             yield { Name =  "1. juledag" 
-                    Date = new DateTime(year, 12, 25) }
+                    Date = DateTime(year, 12, 25) }
             yield { Name =  "2. juledag" 
-                    Date = new DateTime(year, 12, 26) }
+                    Date = DateTime(year, 12, 26) }
             }
 
     let HolidaysSE year =
@@ -47,9 +47,9 @@ module Holidays =
         let easterday = Computus.EasterDay year
         seq {
             yield { Name =  "Nyårsdagen" 
-                    Date = new DateTime(year, 1, 1) }
+                    Date = DateTime(year, 1, 1) }
             yield { Name =  "Trettondedag jul" 
-                    Date = new DateTime(year, 1, 6) }
+                    Date = DateTime(year, 1, 6) }
             yield { Name =  "Långfredagen" 
                     Date = easterday.AddDays(-2.0) } 
             yield { Name =  "Påskdagen" 
@@ -61,23 +61,23 @@ module Holidays =
             yield { Name =  "Pingstdagen" 
                     Date = easterday.AddDays(49.0) } 
             yield { Name =  "Valborg, Första Maj" 
-                    Date = new DateTime(year, 5, 1) } 
+                    Date = DateTime(year, 5, 1) } 
             yield { Name =  "Sveriges nationaldag" 
-                    Date = new DateTime(year, 6, 6) } 
+                    Date = DateTime(year, 6, 6) } 
             yield { Name =  "Midsommarafton" 
-                    Date =  Dates.WeekdayAfterOrOn(DayOfWeek.Friday, new DateTime(year, 6, 19)) }
+                    Date =  Dates.WeekdayAfterOrOn(DayOfWeek.Friday, DateTime(year, 6, 19)) }
             yield { Name =  "Midsommardagen" 
-                    Date = Dates.WeekdayAfterOrOn(DayOfWeek.Saturday, new DateTime(year, 6, 20)) } 
+                    Date = Dates.WeekdayAfterOrOn(DayOfWeek.Saturday, DateTime(year, 6, 20)) } 
             yield { Name =  "Alla Helgons dag" 
-                    Date = Dates.WeekdayAfterOrOn(DayOfWeek.Saturday, new DateTime(year, 10, 31)) } 
+                    Date = Dates.WeekdayAfterOrOn(DayOfWeek.Saturday, DateTime(year, 10, 31)) } 
             yield { Name =  "Julafton" 
-                    Date = new DateTime(year, 12, 25) } 
+                    Date = DateTime(year, 12, 25) } 
             yield { Name =  "Juldagen" 
-                    Date = new DateTime(year, 12, 25) } 
+                    Date = DateTime(year, 12, 25) } 
             yield { Name =  "Annandag Jul" 
-                    Date = new DateTime(year, 12, 26) } 
+                    Date = DateTime(year, 12, 26) } 
             yield { Name =  "Nyårsafton" 
-                    Date = new DateTime(year, 12, 31) } 
+                    Date = DateTime(year, 12, 31) } 
             }
 
     let HolidaysDK year =
@@ -85,7 +85,7 @@ module Holidays =
         let easterday = Computus.EasterDay year
         seq {
             yield { Name = "Nytårsdag" 
-                    Date = new DateTime(year, 1, 1) }
+                    Date = DateTime(year, 1, 1) }
             yield { Name =  "Palmesøndag" 
                     Date = easterday.AddDays(-7.0) } 
             yield { Name =  "Skærtorsdag" 
@@ -107,15 +107,15 @@ module Holidays =
             yield { Name =  "2. pinsedag" 
                     Date = easterday.AddDays(50.0) } 
             yield { Name =  "Grundlovsdag" 
-                    Date = new DateTime(year, 6, 5) } 
+                    Date = DateTime(year, 6, 5) } 
             yield { Name =  "Juleaftensdag" 
-                    Date = new DateTime(year, 12, 24) } 
+                    Date = DateTime(year, 12, 24) } 
             yield { Name =  "1. juledag" 
-                    Date = new DateTime(year, 12, 25) } 
+                    Date = DateTime(year, 12, 25) } 
             yield { Name =  "2. juledag" 
-                    Date = new DateTime(year, 12, 26) } 
+                    Date = DateTime(year, 12, 26) } 
             yield { Name =  "Nytårsaftensdag" 
-                    Date = new DateTime(year, 12, 31) } 
+                    Date = DateTime(year, 12, 31) } 
             }
     
     let ForYear (country:CountryCode.Countries) (year:int) =
@@ -123,8 +123,6 @@ module Holidays =
             | CountryCode.Countries.Norway -> HolidaysNO year
             | CountryCode.Countries.Sweden -> HolidaysSE year
             | CountryCode.Countries.Denmark -> HolidaysDK year
-            | CountryCode.Countries.GreatBrittain -> HolidaysDK year
-            | CountryCode.Countries.USA -> HolidaysDK year
 
     let DatesForYear country year =
         ForYear country year |> Seq.map (fun holiday -> holiday.Date)

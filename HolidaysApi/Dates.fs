@@ -5,7 +5,7 @@ open System
 module Dates =
     type Span = Span of TimeSpan with
         static member (+) (d:DateTime, Span wrapper) = d + wrapper
-        static member Zero = Span(new TimeSpan(0L))
+        static member Zero = Span(TimeSpan(0L))
 
     let IsSunday(date:DateTime) = 
         let day = date.DayOfWeek
@@ -18,7 +18,7 @@ module Dates =
     let WeekdayAfterOrOn(weekday:DayOfWeek, firstDate:DateTime) = //TODO
         let ts = TimeSpan.FromDays(1.0)
         [ firstDate .. Span(ts) .. firstDate.AddDays(6.0) ]
-        |> Seq.find (fun (date) -> date.DayOfWeek = weekday)
+        |> Seq.find (fun date -> date.DayOfWeek = weekday)
 
     let FormatDate(date:DateTime) =
         date.ToString("yyyy-MM-dd")

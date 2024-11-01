@@ -3,7 +3,7 @@
 open System
 
 module CountryCode = 
-    type Countries = Norway | Sweden | Denmark | GreatBrittain | USA
+    type Countries = Norway | Sweden | Denmark
 
     let DefaultCountry = Norway
 
@@ -12,8 +12,6 @@ module CountryCode =
             | "no" -> Some Norway
             | "se" -> Some Sweden
             | "dk" -> Some Denmark
-            | "uk" -> Some GreatBrittain
-            | "us" -> Some USA
             | _ -> None
 
     let CodeFromCountry country =
@@ -21,13 +19,11 @@ module CountryCode =
             | Norway -> "no"
             | Denmark -> "dk"
             | Sweden -> "se"
-            | GreatBrittain -> "uk"
-            | USA -> "us"
 
     let CurrentCountryCode = 
         let currentCulture = System.Globalization.CultureInfo.CurrentCulture
         let countrychars = currentCulture.ToString().ToCharArray() |> Array.rev |> Seq.take 2 |> Seq.toArray |> Array.rev // TODO
-        System.String.Concat(countrychars)
+        String.Concat(countrychars)
 
     let CurrentCountry = CountryFromCode CurrentCountryCode
 

@@ -15,7 +15,7 @@ module Computus =
         let d2 = e3 >>> 5
         let day = e3 - d2 * 31
         let month = d2 + 3
-        new DateTime(year, month, day)
+        DateTime(year, month, day)
 
     // Based upon the VB example in https://en.wikipedia.org/wiki/Computus
     let EasterDay2 (year:int) = 
@@ -28,5 +28,5 @@ module Computus =
         let easterLimit = 21 + fullMoonSeed - calendarianCorrection
         let firstSundayInMarch = 7 - ((year + year / 4 + secularSunShift) % 7)
         let easterSundayDistance = 7 - ((easterLimit - firstSundayInMarch) % 7)
-        let firstOfMarch = new DateTime(year, 3, 1)
+        let firstOfMarch = DateTime(year, 3, 1)
         firstOfMarch.AddDays(float easterLimit).AddDays(float easterSundayDistance).AddDays(-1.0)
