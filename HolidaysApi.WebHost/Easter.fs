@@ -1,9 +1,8 @@
 module HolidaysApi.WebHost.Easter
 
 open System
-open Aklefdal.Holidays
-open Aklefdal.Holidays.HttpApi
 open Oxpecker
+open HolidaysApi.Core
 open Renditions
 
 let getEasterForYear (year: int) =

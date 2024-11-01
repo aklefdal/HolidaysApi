@@ -1,7 +1,6 @@
 module HolidaysApi.WebHost.Program
 
-open Aklefdal.Holidays
-open Aklefdal.Holidays.HttpApi
+open HolidaysApi.Core
 open HolidaysApi.WebHost
 open Microsoft.AspNetCore.Builder
 open Microsoft.Extensions.DependencyInjection

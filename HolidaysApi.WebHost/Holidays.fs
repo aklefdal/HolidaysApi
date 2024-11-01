@@ -1,8 +1,7 @@
 module HolidaysApi.WebHost.Holidays
 
 open System
-open Aklefdal.Holidays
-open Aklefdal.Holidays.HttpApi
+open HolidaysApi.Core
 open Oxpecker
 open Renditions
 

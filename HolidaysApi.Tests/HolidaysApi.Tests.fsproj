@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HolidaysApi\HolidaysApi.fsproj" />
+    <ProjectReference Include="..\HolidaysApi.Core\HolidaysApi.Core.fsproj" />
   </ItemGroup>
 
 </Project>

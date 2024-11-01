@@ -1,11 +1,10 @@
 module HolidaysApi.WebHost.Dates
 
 open System
-open Aklefdal.Holidays
-open Aklefdal.Holidays.HttpApi
 open Microsoft.AspNetCore.Http
 open Oxpecker
-open Renditions
+open HolidaysApi.Core
+open HolidaysApi.Core.Renditions
 
 let properDateResponse country date =
     let previousWorkday = Workdays.PreviousWorkday country date

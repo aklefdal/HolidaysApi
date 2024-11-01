@@ -1,8 +1,8 @@
 ﻿module HolidaysApi.Tests
 
 open FsCheck.Xunit
-open System 
-open Aklefdal.Holidays.HttpApi.Computus
+open System
+open HolidaysApi.Core.Computus
 
 [<Property>]
 let ``Easter Day is Sunday`` (date: DateTime) =

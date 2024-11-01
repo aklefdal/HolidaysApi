@@ -2,7 +2,7 @@
 
 open System 
 open FsCheck.Xunit
-open Aklefdal.Holidays.HttpApi.Holidays
+open HolidaysApi.Core.Holidays
 
 [<Property>]
 let ``Langfredag is fredag in Norway`` (date: DateTime) =
