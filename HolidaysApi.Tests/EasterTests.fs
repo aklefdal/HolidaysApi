@@ -1,8 +1,6 @@
 ﻿module HolidaysApi.Tests
 
-open NUnit.Framework
-open FsCheck
-open FsCheck.NUnit
+open FsCheck.Xunit
 open System 
 open Aklefdal.Holidays.HttpApi.Computus
 
@@ -18,13 +16,13 @@ let ``Algorithms are equal`` (date: DateTime) =
 [<Property>]
 let ``In Western Christianity, using the Gregorian calendar, Easter always falls on a Sunday between 22 March and 25 April inclusive``(date: DateTime) =
     let easter = EasterDay date.Year
-    let firstPossibleDay = new DateTime(date.Year, 3, 22)
-    let lastPossibleDay = new DateTime(date.Year, 4, 25)
+    let firstPossibleDay = DateTime(date.Year, 3, 22)
+    let lastPossibleDay = DateTime(date.Year, 4, 25)
     easter >= firstPossibleDay && easter <= lastPossibleDay && easter.DayOfWeek = DayOfWeek.Sunday
 
 [<Property>]
 let ``Alg2: In Western Christianity, using the Gregorian calendar, Easter always falls on a Sunday between 22 March and 25 April inclusive``(date: DateTime) =
     let easter = EasterDay2 date.Year
-    let firstPossibleDay = new DateTime(date.Year, 3, 22)
-    let lastPossibleDay = new DateTime(date.Year, 4, 25)
+    let firstPossibleDay = DateTime(date.Year, 3, 22)
+    let lastPossibleDay = DateTime(date.Year, 4, 25)
     easter >= firstPossibleDay && easter <= lastPossibleDay 

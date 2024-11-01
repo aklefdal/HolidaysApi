@@ -1,9 +1,7 @@
 ﻿module HolidayTests
 
-open NUnit.Framework
-open FsCheck
 open System 
-open FsCheck.NUnit
+open FsCheck.Xunit
 open Aklefdal.Holidays.HttpApi.Holidays
 
 [<Property>]
@@ -26,6 +24,6 @@ let ``Kristi himmelfartsdag is between 30. april – 3. juni`` (date: DateTime) 
     let norwegianHolidays =  HolidaysNO date.Year 
     let himmelfartsdag = Seq.find (fun holiday -> holiday.Name = "Kristi Himmelfartsdag") norwegianHolidays
     let year = date.Year
-    let firstPossibleDay = new DateTime(year, 4, 30)
-    let lastPossibleDay = new DateTime(year, 6, 3)
+    let firstPossibleDay = DateTime(year, 4, 30)
+    let lastPossibleDay = DateTime(year, 6, 3)
     himmelfartsdag.Date >= firstPossibleDay && himmelfartsdag.Date <= lastPossibleDay 
